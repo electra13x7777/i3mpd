@@ -6,6 +6,14 @@ Enhanced fork of spotify.py
 * CenterMouseButton : play/pause
 * LeftMouseButton : next
 
+### Features
+* Reformats metadata to be complient with what can be outputed in i3blocks
+* Displays song controls `❲ ⏮  (⏵) ⏭ ❳` dynamically depending on playback state
+* Displays Current Song (Artist : Album - Song)
+
+### Music Player Support
+* *Spotify*
+
 ### Block
 ```
 [i3mpd]
