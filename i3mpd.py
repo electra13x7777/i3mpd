@@ -47,9 +47,6 @@ try:
     spotify_iface = dbus.Interface(spotify, 'org.freedesktop.DBus.Properties')
     props = spotify_iface.Get('org.mpris.MediaPlayer2.Player', 'Metadata')
 
-    # mpv Player
-    #mpv = bus.get_object("org.mpris.MediaPlayer2.mpv", "/org/mpris/MediaPlayer2")
-
     if os.environ.get('BLOCK_BUTTON'):
         control_iface = dbus.Interface(spotify, 'org.mpris.MediaPlayer2.Player')
         if (os.environ['BLOCK_BUTTON'] == '1'):
@@ -58,7 +55,6 @@ try:
             control_iface.PlayPause()
         elif (os.environ['BLOCK_BUTTON'] == '3'):
             control_iface.Next()
-
 
     # Update PlaybackStatus
     pbstate = spotify_iface.Get('org.mpris.MediaPlayer2.Player', 'PlaybackStatus')
