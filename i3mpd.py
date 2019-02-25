@@ -14,7 +14,13 @@ import sys
 #
 # @params: int albumlen, int songlen, string album, string song
 # Description: Formats album and song strings to given length. The Artist will not be reformatted.
-def format_str(max_album_len, max_song_len, album, song):
+def format(max_album_len, max_song_len, album, song):
+    # format i3 unsupported characters
+    if('&' in album):
+        album = album.replace('&', 'and')
+    if('&' in song):
+        song = song.replace('&', 'and')
+
     # assign len vars
     albumlen = len(album)
     songlen = len(song)
@@ -63,8 +69,8 @@ try:
     album = str(props['xesam:album'])
     song = str(props['xesam:title'])
 
-    format_str(20, 25, album, song)
-    aas = str(props['xesam:artist'][0]) + ' : ' + format_str(20, 25, album, song)
+    format(20, 25, album, song)
+    aas = str(props['xesam:artist'][0]) + ' : ' + format(20, 25, album, song)
 
     if (sys.version_info > (3, 0)):
         print('❲ ⏮ ' + pbtn + '⏭ ❳  ' + aas)
@@ -74,6 +80,3 @@ try:
 
 except dbus.exceptions.DBusException:
     exit
-
-
-
