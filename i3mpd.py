@@ -14,21 +14,30 @@ import sys
 #
 # @params: int albumlen, int songlen, string album, string song
 # Description: Formats album and song strings to given length. The Artist will not be reformatted.
-def format_str(max_album_len, max_song_len, album, song):
+def format(max_album_len, max_song_len, artist, album, song):
+    # format i3 unsupported characters
+    # &
+    if('&' in artist):
+        artist = artist.replace('&', 'and')
+    if('&' in album):
+        album = album.replace('&', 'and')
+    if('&' in song):
+        song = song.replace('&', 'and')
+
     # assign len vars
     albumlen = len(album)
     songlen = len(song)
     # check if strings are already formatted to desired lengths
     if(albumlen <= max_album_len and songlen <= max_song_len):
-        return str(album + ' - ' + song)
+        return str(artist + ' : ' + album + ' - ' + song)
     # check if album is too long
     elif(albumlen > max_album_len and songlen <= max_song_len):
-        return str(album[:max_album_len] + '...' + ' - ' + song)
+        return str(artist + ' : ' + album[:max_album_len] + '...' + ' - ' + song)
     # check if song is too long
     elif(albumlen <= max_album_len and songlen > max_song_len):
-        return str(album + ' - ' + song[:max_song_len] + '...')
+        return str(artist + ' : ' + album + ' - ' + song[:max_song_len] + '...')
     else:
-        return str(album[:max_album_len] + '...' + ' - ' + song[:max_song_len] + '...')
+        return str(artist + ' : ' + album[:max_album_len] + '...' + ' - ' + song[:max_song_len] + '...')
 
 try:
     bus = dbus.SessionBus()
@@ -47,7 +56,6 @@ try:
         elif (os.environ['BLOCK_BUTTON'] == '3'):
             control_iface.Next()
 
-
     # Update PlaybackStatus
     pbstate = spotify_iface.Get('org.mpris.MediaPlayer2.Player', 'PlaybackStatus')
     pbtn = ''
@@ -60,11 +68,11 @@ try:
         pbtn = ' (⏹) '
 
     # Wrapping Text
+    artist = str(props['xesam:artist'][0])
     album = str(props['xesam:album'])
     song = str(props['xesam:title'])
 
-    format_str(20, 25, album, song)
-    aas = str(props['xesam:artist'][0]) + ' : ' + format_str(20, 25, album, song)
+    aas = format(20, 25, artist, album, song)
 
     if (sys.version_info > (3, 0)):
         print('❲ ⏮ ' + pbtn + '⏭ ❳  ' + aas)
@@ -74,6 +82,3 @@ try:
 
 except dbus.exceptions.DBusException:
     exit
-
-
-
