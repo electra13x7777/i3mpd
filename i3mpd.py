@@ -74,7 +74,7 @@ try:
     aas = format(20, 25, artist, album, song)
 
     if (sys.version_info > (3, 0)):
-        print('❲ ⏮ ' + pbtn + '⏭ ❳  ' + aas)
+        print(aas + ' ❲ ⏮ ' + pbtn + '⏭ ❳ ')
     else:
         print(props['xesam:artist'][0] + pbtn + props['xesam:title']).encode('utf-8')
     exit
