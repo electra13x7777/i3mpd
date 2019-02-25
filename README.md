@@ -7,7 +7,7 @@ Enhanced fork of spotify.py
 * LeftMouseButton : next
 
 ### Features
-* Reformats metadata to be complient with what can be outputed in i3blocks
+* Reformats metadata to be compliant with what can be outputed in i3blocks
 * Displays song controls `❲ ⏮  (⏵) ⏭ ❳` dynamically depending on playback state
 * Displays Current Song (Artist : Album - Song)
 
