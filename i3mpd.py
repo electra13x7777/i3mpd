@@ -47,14 +47,23 @@ try:
     spotify_iface = dbus.Interface(spotify, 'org.freedesktop.DBus.Properties')
     props = spotify_iface.Get('org.mpris.MediaPlayer2.Player', 'Metadata')
 
+    nbtn = '⏭ ❳ '
+    prbtn =  ' ❲ ⏮ '
+
+
     if os.environ.get('BLOCK_BUTTON'):
         control_iface = dbus.Interface(spotify, 'org.mpris.MediaPlayer2.Player')
         if (os.environ['BLOCK_BUTTON'] == '1'):
             control_iface.Previous()
+            prbtn =  ' ❲⏮  '
         elif (os.environ['BLOCK_BUTTON'] == '2'):
             control_iface.PlayPause()
         elif (os.environ['BLOCK_BUTTON'] == '3'):
             control_iface.Next()
+            nbtn = ' ⏭❳ '
+        else:
+            prbtn =  ' ❲ ⏮ '
+            nbtn = ' ⏭ ❳ '
 
     # Update PlaybackStatus
     pbstate = spotify_iface.Get('org.mpris.MediaPlayer2.Player', 'PlaybackStatus')
@@ -74,7 +83,7 @@ try:
     aas = format(20, 25, artist, album, song)
 
     if (sys.version_info > (3, 0)):
-        print(aas + ' ❲ ⏮ ' + pbtn + '⏭ ❳ ')
+        print(aas + prbtn + pbtn + nbtn)
     else:
         print(props['xesam:artist'][0] + pbtn + props['xesam:title']).encode('utf-8')
     exit
