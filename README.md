@@ -9,7 +9,8 @@ Enhanced fork of spotify.py
 ### Features
 * Reformats metadata to be compliant with what can be outputed in i3blocks
 * Displays song controls `❲ ⏮  (⏵) ⏭ ❳` dynamically depending on playback state
-* Displays Current Song (Artist : Album - Song)
+* Displays Current Song *(Artist : Album - Song)*
+* Displays Song Length *(MM:SS)*
 
 ### Music Player Support
 * *Spotify*
@@ -22,3 +23,7 @@ command= python /lib64/i3blocks/i3mpd.py
 color=#21b089
 interval=1
 ```
+
+### Output
+* **Artist : Album - Song (Mins:Secs) ❲Controls❳**
+`Talking Heads : Remain In Light - The Great Curve (6:28) ❲ ⏮  (⏸) ⏭ ❳`

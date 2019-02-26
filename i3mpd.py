@@ -50,7 +50,6 @@ try:
     nbtn = '⏭ ❳ '
     prbtn =  ' ❲ ⏮ '
 
-
     if os.environ.get('BLOCK_BUTTON'):
         control_iface = dbus.Interface(spotify, 'org.mpris.MediaPlayer2.Player')
         if (os.environ['BLOCK_BUTTON'] == '1'):
@@ -80,10 +79,14 @@ try:
     artist = str(props['xesam:artist'][0])
     album = str(props['xesam:album'])
     song = str(props['xesam:title'])
-    aas = format(20, 25, artist, album, song)
+    metadata = format(20, 25, artist, album, song)
+
+    mins = int(props['mpris:length']/1000000//60)
+    secs = str('%2f' % float(props['mpris:length']/1000000%60/100))
+    time = str(" (%d:%s)" % (mins, secs[2:4]))
 
     if (sys.version_info > (3, 0)):
-        print(aas + prbtn + pbtn + nbtn)
+        print(metadata + time + prbtn + pbtn + nbtn)
     else:
         print(props['xesam:artist'][0] + pbtn + props['xesam:title']).encode('utf-8')
     exit
