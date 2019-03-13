@@ -32,7 +32,7 @@ interval=1
 ```
 [module/i3mpd]
 type = custom/script
-exec ~/i3mpd.sh
+exec = ~/i3mpd.sh
 interval = 1
 ```
 
