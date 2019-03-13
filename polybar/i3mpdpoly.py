@@ -69,11 +69,11 @@ try:
     pbtn = ''
 
     if(pbstate == 'Paused'):
-        pbtn = ' (⏵) '
+        pbtn = ' ( ⏵)'
     elif(pbstate == 'Playing'):
-        pbtn = ' (⏸) '
+        pbtn = ' ( ⏸)'
     else:
-        pbtn = ' (⏹) '
+        pbtn = ' ( ⏹)'
 
     # Wrapping Text
     artist = str(props['xesam:artist'][0])
@@ -86,7 +86,7 @@ try:
     time = str(" (%d:%s)" % (mins, secs[2:4]))
 
     if (sys.version_info > (3, 0)):
-        print(metadata + time + prbtn + pbtn + nbtn)
+        print(metadata + time + pbtn)
     else:
         print(props['xesam:artist'][0] + pbtn + props['xesam:title']).encode('utf-8')
     exit

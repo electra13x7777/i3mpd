@@ -12,16 +12,28 @@ Enhanced fork of spotify.py
 * Displays Current Song *(Artist : Album - Song)*
 * Displays Song Length *(MM:SS)*
 
+### Status Bar Support
+* i3blocks
+* Polybar
+
 ### Music Player Support
 * *Spotify*
 
-### Block
+### i3blocks
 ```
 [i3mpd]
 label=
 command= python /lib64/i3blocks/i3mpd.py
 color=#21b089
 interval=1
+```
+
+### Polybar
+```
+[module/i3mpd]
+type = custom/script
+exec ~/i3mpd.sh
+interval = 1
 ```
 
 ### Output
